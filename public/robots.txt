@@ -1,0 +1,6 @@
+# TAI Protocol - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://taiprotocol.com/sitemap.xml

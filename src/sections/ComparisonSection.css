@@ -1,0 +1,330 @@
+/* ========================================
+   COMPARISON SECTION - Clean and Professional
+   ======================================== */
+
+.comparison-section {
+    min-height: 100vh;
+    padding: 80px 20px;
+    position: relative;
+    background: var(--color-void-black);
+}
+
+/* Header */
+.comparison-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(173, 255, 47, 0.08);
+    border: 1px solid rgba(173, 255, 47, 0.2);
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-acid-green);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-acid-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-acid-green);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 8vw, 64px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.title-white {
+    color: var(--color-text-primary);
+}
+
+.title-accent {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+.title-gradient {
+    background: linear-gradient(135deg, var(--color-acid-green), #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 24px;
+    background: rgba(173, 255, 47, 0.03);
+    border: 1px solid rgba(173, 255, 47, 0.1);
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 0 auto 48px;
+}
+
+.stat-block {
+    text-align: center;
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--color-acid-green);
+}
+
+.stat-unit {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(173, 255, 47, 0.7);
+    margin-left: 4px;
+}
+
+.stat-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+/* Comparison Container */
+.comparison-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 48px;
+    flex-wrap: wrap;
+}
+
+/* Comparison Cards */
+.comparison-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.comparison-card:hover {
+    transform: translateY(-4px);
+}
+
+.comparison-card.traditional:hover {
+    border-color: rgba(255, 100, 100, 0.3);
+}
+
+.comparison-card.tai:hover {
+    border-color: rgba(173, 255, 47, 0.4);
+    box-shadow: 0 8px 32px rgba(173, 255, 47, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.traditional .card-header {
+    background: rgba(255, 100, 100, 0.05);
+}
+
+.tai .card-header {
+    background: rgba(173, 255, 47, 0.05);
+}
+
+.card-icon {
+    font-size: 20px;
+}
+
+.traditional .card-icon {
+    color: #ff6b6b;
+}
+
+.tai .card-icon {
+    color: var(--color-acid-green);
+}
+
+.card-header h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.feature-row:last-child {
+    border-bottom: none;
+}
+
+.feature-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.feature-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.feature-value.bad {
+    color: #ff6b6b;
+}
+
+.feature-value.good {
+    color: var(--color-acid-green);
+}
+
+.card-footer {
+    padding: 16px 20px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+}
+
+.card-footer.bad {
+    background: rgba(255, 100, 100, 0.08);
+    color: rgba(255, 100, 100, 0.8);
+}
+
+.card-footer.good {
+    background: rgba(173, 255, 47, 0.08);
+    color: var(--color-acid-green);
+    font-weight: 600;
+}
+
+/* VS Divider */
+.vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    align-self: center;
+}
+
+/* Bottom Quote */
+.bottom-quote {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px;
+    background: rgba(173, 255, 47, 0.03);
+    border: 1px solid rgba(173, 255, 47, 0.1);
+    border-radius: 8px;
+}
+
+.bottom-quote p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .comparison-section {
+        padding: 60px 16px;
+    }
+
+    .stats-bar {
+        gap: 24px;
+        padding: 20px;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    .comparison-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vs-divider {
+        width: 50px;
+        height: 50px;
+        font-size: 12px;
+    }
+
+    .comparison-card {
+        max-width: 100%;
+    }
+}

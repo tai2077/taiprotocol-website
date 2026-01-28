@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#adff2f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8acc26;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer square -->
+  <rect x="10" y="10" width="80" height="80" fill="none" stroke="url(#greenGradient)" stroke-width="2" rx="4" filter="url(#glow)"/>
+  
+  <!-- Inner diamond -->
+  <path d="M50 25 L75 50 L50 75 L25 50 Z" fill="url(#greenGradient)" filter="url(#glow)"/>
+  
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="8" fill="#0d0d0d"/>
+  <circle cx="50" cy="50" r="4" fill="url(#greenGradient)"/>
+</svg>

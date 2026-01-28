@@ -1,0 +1,147 @@
+/* ========================================
+   MARQUEE STRIP - Optimized with CSS
+   ======================================== */
+
+.marquee-strip {
+    width: 100%;
+    overflow: hidden;
+    padding: 18px 0;
+    position: relative;
+    transform: skewY(-1deg);
+    margin: 20px 0;
+    /* Use hardware acceleration */
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.marquee-green {
+    background: var(--color-acid-green);
+}
+
+.marquee-pink {
+    background: var(--color-hot-pink);
+}
+
+.marquee-mixed {
+    background: linear-gradient(90deg, var(--color-acid-green), var(--color-hot-pink), var(--color-electric-purple), var(--color-acid-green));
+    background-size: 400% 100%;
+    animation: gradient-shift 8s linear infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 400% 50%;
+    }
+}
+
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    /* Use transform for better performance */
+    animation: marquee-scroll linear infinite;
+    /* Hardware acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.marquee-track.marquee-reverse {
+    animation-direction: reverse;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0) translateZ(0);
+    }
+
+    100% {
+        transform: translateX(-50%) translateZ(0);
+    }
+}
+
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 24px;
+}
+
+.marquee-text {
+    font-family: var(--font-display);
+    font-size: clamp(14px, 2.5vw, 18px);
+    font-weight: 800;
+    color: var(--color-void-black);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.marquee-separator {
+    font-size: 10px;
+    opacity: 0.6;
+    color: var(--color-void-black);
+}
+
+/* Edge Fades */
+.marquee-strip::before,
+.marquee-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.marquee-green::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--color-acid-green), transparent);
+}
+
+.marquee-green::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--color-acid-green), transparent);
+}
+
+.marquee-pink::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--color-hot-pink), transparent);
+}
+
+.marquee-pink::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--color-hot-pink), transparent);
+}
+
+/* Hover effect - subtle slowdown instead of pause */
+.marquee-strip:hover .marquee-track {
+    animation-duration: 40s;
+}
+
+/* Mobile optimizations - reduce animation complexity */
+@media (max-width: 768px) {
+    .marquee-strip {
+        padding: 14px 0;
+        transform: skewY(0);
+    }
+
+    .marquee-item {
+        padding: 0 14px;
+        gap: 14px;
+    }
+
+    .marquee-strip::before,
+    .marquee-strip::after {
+        width: 40px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+    }
+}

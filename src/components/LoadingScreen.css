@@ -1,0 +1,302 @@
+/* ========================================
+   LOADING SCREEN - Optimized for Performance
+   ======================================== */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-void-black);
+    overflow: hidden;
+}
+
+/* Simple gradient background */
+.loading-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(173, 255, 47, 0.03) 0%, transparent 50%),
+        var(--color-bg-primary);
+}
+
+.gradient-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(173, 255, 47, 0.08) 0%, transparent 70%);
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Content */
+.loading-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+}
+
+/* Logo */
+.loading-logo {
+    text-align: center;
+}
+
+.logo-brackets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: clamp(36px, 8vw, 56px);
+    font-weight: 900;
+}
+
+.bracket {
+    color: rgba(173, 255, 47, 0.4);
+}
+
+.logo-text {
+    color: var(--color-acid-green);
+    letter-spacing: 0.1em;
+}
+
+.pulse-glow {
+    animation: text-glow 2s ease-in-out infinite;
+}
+
+@keyframes text-glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 40px rgba(173, 255, 47, 0.8), 0 0 60px rgba(173, 255, 47, 0.4);
+    }
+}
+
+.logo-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.3em;
+    margin-top: 8px;
+}
+
+/* Terminal */
+.loading-terminal {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(173, 255, 47, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(173, 255, 47, 0.05);
+    border-bottom: 1px solid rgba(173, 255, 47, 0.1);
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: #ff5f56;
+}
+
+.dot.yellow {
+    background: #ffbd2e;
+}
+
+.dot.green {
+    background: #27ca40;
+}
+
+.terminal-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.terminal-body {
+    padding: 14px;
+    min-height: 100px;
+}
+
+.terminal-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fade-in 0.15s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.terminal-line.active {
+    color: var(--color-acid-green);
+}
+
+.terminal-line.success {
+    color: var(--color-acid-green);
+    font-weight: 600;
+}
+
+.line-prefix {
+    color: rgba(173, 255, 47, 0.6);
+}
+
+.cursor {
+    animation: blink 0.8s step-end infinite;
+    color: var(--color-acid-green);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.status-ok {
+    margin-left: auto;
+    color: var(--color-acid-green);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* Progress */
+.loading-progress {
+    width: 100%;
+    max-width: 400px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.progress-label {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.progress-value {
+    color: var(--color-acid-green);
+}
+
+.progress-track {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--color-acid-green);
+    border-radius: 2px;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(173, 255, 47, 0.5);
+}
+
+/* Footer */
+.loading-footer {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.item-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-acid-green);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--color-acid-green);
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .loading-terminal {
+        max-width: 100%;
+    }
+
+    .loading-progress {
+        max-width: 100%;
+    }
+
+    .loading-footer {
+        gap: 16px;
+    }
+
+    .gradient-glow {
+        width: 300px;
+        height: 300px;
+    }
+}
