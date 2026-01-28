@@ -135,7 +135,7 @@ const HeroSection = () => {
                             </p>
                             <div className="hero-cta-group">
                                 <motion.a
-                                    href="https://app.taiprotocol.com"
+                                    href="https://app.tai.lat"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-punk btn-punk-filled btn-punk-lg hero-cta"

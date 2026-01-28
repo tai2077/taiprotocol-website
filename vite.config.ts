@@ -13,6 +13,7 @@ export default defineConfig({
             rendererOptions: {
                 maxConcurrentRoutes: 1,
                 renderAfterTime: 3000, // 等待 3 秒让页面完全渲染（包括加载动画）
+                timeout: 60000, // 增加超时时间到 60 秒
             },
             postProcess(renderedRoute) {
                 // 移除预渲染时的加载屏幕，让用户直接看到内容

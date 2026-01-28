@@ -111,7 +111,7 @@ const Header = () => {
                                 <span className="status-text">{t.header.mainnet}</span>
                             </div>
                             <motion.a
-                                href="https://app.taiprotocol.com"
+                                href="https://app.tai.lat"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn-punk btn-punk-filled"
@@ -196,7 +196,7 @@ const Header = () => {
 
                             <div className="mobile-menu-footer">
                                 <motion.a
-                                    href="https://app.taiprotocol.com"
+                                    href="https://app.tai.lat"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-punk btn-punk-filled mobile-cta"

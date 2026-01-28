@@ -195,7 +195,7 @@ const EcosystemSection = () => {
                         {t.ecosystem.categories.governance}
                     </button>
                     <a
-                        href="https://docs.taiprotocol.com"
+                        href="https://docs.tai.lat"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="nav-item"
