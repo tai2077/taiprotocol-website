@@ -145,26 +145,45 @@ const ProtocolSection = () => {
                 >
                     <div className="flow-step">
                         <div className="step-number">01</div>
-                        <div className="step-icon">📈</div>
+                        <div className="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <path d="M3 17l6-6 4 4 8-8" />
+                                <path d="M17 7h4v4" />
+                            </svg>
+                        </div>
                         <h3>{language === 'zh' ? '价格达标' : 'Price Target'}</h3>
                         <p>{language === 'zh' ? '市场价格达到当前轮次目标' : 'Market price reaches current round target'}</p>
                     </div>
                     <div className="flow-arrow">→</div>
                     <div className="flow-step">
                         <div className="step-number">02</div>
-                        <div className="step-icon">⏱️</div>
+                        <div className="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                        </div>
                         <h3>{language === 'zh' ? '72小时共识' : '72h Consensus'}</h3>
                         <p>{language === 'zh' ? '价格必须维持在目标之上' : 'Price must stay above target'}</p>
                     </div>
                     <div className="flow-arrow">→</div>
                     <div className="flow-step highlight">
                         <div className="step-number">03</div>
-                        <div className="step-icon">🔓</div>
+                        <div className="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg>
+                        </div>
                         <h3>{language === 'zh' ? '自动解锁' : 'Auto Unlock'}</h3>
                         <p>{language === 'zh' ? '合约自动分发 50亿 TAI' : 'Contract auto-distributes 5B TAI'}</p>
                     </div>
                     <div className="flow-reset">
-                        <div className="reset-icon">⚡</div>
+                        <div className="reset-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
+                        </div>
                         <div className="reset-text">
                             <strong>{language === 'zh' ? '熔断机制' : 'Circuit Breaker'}</strong>
                             <span>{language === 'zh' ? '价格跌破目标，计时器归零' : 'Price drops below target, timer resets'}</span>
@@ -403,22 +422,42 @@ const ProtocolSection = () => {
                     </h2>
                     <div className="rules-grid">
                         <div className="rule-card">
-                            <div className="rule-icon">⚖️</div>
+                            <div className="rule-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <path d="M12 3v18M3 12h18M5.5 5.5l13 13M18.5 5.5l-13 13" />
+                                </svg>
+                            </div>
                             <h3>{language === 'zh' ? '代码即法律' : 'Code is Law'}</h3>
                             <p>{language === 'zh' ? '智能合约是唯一的裁判，没有后门，没有例外' : 'Smart contract is the only judge, no backdoors, no exceptions'}</p>
                         </div>
                         <div className="rule-card">
-                            <div className="rule-icon">🔒</div>
+                            <div className="rule-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                                </svg>
+                            </div>
                             <h3>{language === 'zh' ? '无业绩无流动性' : 'No Performance, No Liquidity'}</h3>
                             <p>{language === 'zh' ? '价格不达标，一枚代币都流不出' : 'Price not met, not a single token flows out'}</p>
                         </div>
                         <div className="rule-card">
-                            <div className="rule-icon">🔗</div>
+                            <div className="rule-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+                                </svg>
+                            </div>
                             <h3>{language === 'zh' ? '链上透明' : 'On-chain Transparency'}</h3>
                             <p>{language === 'zh' ? '所有规则写在合约里，任何人可验证' : 'All rules in contract, verifiable by anyone'}</p>
                         </div>
                         <div className="rule-card">
-                            <div className="rule-icon">💰</div>
+                            <div className="rule-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                    <path d="M16 8l2-2M8 8L6 6M16 16l2 2M8 16l-2 2" />
+                                </svg>
+                            </div>
                             <h3>{language === 'zh' ? '市场证明' : 'Market Proof'}</h3>
                             <p>{language === 'zh' ? '真金白银的价格共识，不是 VC 投票' : 'Real money price consensus, not VC votes'}</p>
                         </div>

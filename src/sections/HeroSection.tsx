@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState, ReactNode, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import { ChartIcon, NetworkIcon, ChainIcon, LightningIcon } from '../components/Icons';
 import './HeroSection.css';
@@ -145,15 +144,16 @@ const HeroSection = () => {
                                     {t.hero.ctaPrimary}
                                     <span className="cta-arrow">→</span>
                                 </motion.a>
-                                <Link to="/terminal">
-                                    <motion.span
-                                        className="btn-punk btn-punk-lg"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                    >
-                                        {t.hero.ctaSecondary}
-                                    </motion.span>
-                                </Link>
+                                <motion.a
+                                    href="https://app.tai.lat"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-punk btn-punk-lg"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    {t.nav.launchApp}
+                                </motion.a>
                             </div>
                         </motion.div>
                     </motion.div>

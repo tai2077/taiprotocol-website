@@ -219,6 +219,14 @@
 .flow-step .step-icon {
     font-size: 32px;
     margin-bottom: 16px;
+    color: var(--color-acid-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flow-step .step-icon svg {
+    stroke: var(--color-acid-green);
 }
 
 .flow-step h3 {
@@ -657,6 +665,14 @@
 .rule-card .rule-icon {
     font-size: 36px;
     margin-bottom: 20px;
+    color: var(--color-acid-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rule-card .rule-icon svg {
+    stroke: var(--color-acid-green);
 }
 
 .rule-card h3 {
