@@ -457,6 +457,49 @@ const EcosystemSection = () => {
                 </motion.div>
             </div>
 
+            {/* Apps Showcase Section */}
+            <div id="apps-section" className="ecosystem-feature-section">
+                <motion.div
+                    className="feature-content"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <h3 className="feature-title">
+                        <span className="feature-icon">◆</span>
+                        {language === 'zh' ? '生态应用' : 'ECOSYSTEM APPS'}
+                    </h3>
+                    <div className="apps-showcase">
+                        <a
+                            href="https://app.tai.lat"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="app-card"
+                        >
+                            <div className="app-logo">
+                                <img src="/faleme-logo.svg" alt="发了么" />
+                            </div>
+                            <div className="app-info">
+                                <h4 className="app-name">
+                                    {language === 'zh' ? '发了么 (TAI Wealth Node)' : 'TAI Wealth Node'}
+                                </h4>
+                                <p className="app-description">
+                                    {language === 'zh'
+                                        ? '游戏化的加密货币财富管理平台。设定目标、追踪进度、赢取奖励。'
+                                        : 'Gamified crypto wealth management platform. Set goals, track progress, earn rewards.'}
+                                </p>
+                                <div className="app-tags">
+                                    <span className="app-tag">{language === 'zh' ? '财富管理' : 'Wealth'}</span>
+                                    <span className="app-tag">{language === 'zh' ? '游戏化' : 'Gamified'}</span>
+                                    <span className="app-tag">DeFi</span>
+                                </div>
+                            </div>
+                            <span className="app-arrow">→</span>
+                        </a>
+                    </div>
+                </motion.div>
+            </div>
+
             {/* Footer */}
             <div className="ecosystem-footer">
                 <span>{language === 'zh' ? 'TON 主网' : 'TON MAINNET'}</span>

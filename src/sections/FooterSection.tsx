@@ -7,8 +7,8 @@ import './FooterSection.css';
 
 // Real social links - moved outside component as constants
 const SOCIAL_LINKS = {
-    twitter: 'https://twitter.com/taiprotocol',
-    telegram: 'https://t.me/taiprotocol',
+    twitter: 'https://x.com/TAIProtocol',
+    telegram: 'https://t.me/taitoken',
     medium: 'https://medium.com/@taiprotocol',
     github: 'https://github.com/taiprotocol',
 } as const;
@@ -86,10 +86,17 @@ const FooterSection = () => {
                             {language === 'zh' ? '代码库' : 'CODEBASE'}
                         </span>
                         {footerLinks.protocol.map((link, i) => (
-                            <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="footer-link">
-                                {link.label}
-                                <span className="link-arrow">→</span>
-                            </a>
+                            link.internal ? (
+                                <Link key={i} to={link.href} className="footer-link">
+                                    {link.label}
+                                    <span className="link-arrow">→</span>
+                                </Link>
+                            ) : (
+                                <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="footer-link">
+                                    {link.label}
+                                    <span className="link-arrow">→</span>
+                                </a>
+                            )
                         ))}
                     </div>
                     <div className="link-group">
