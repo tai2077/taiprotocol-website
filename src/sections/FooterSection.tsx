@@ -21,7 +21,7 @@ const FooterSection = () => {
     const footerLinks = useMemo(() => ({
         protocol: [
             { label: 'Github', href: SOCIAL_LINKS.github },
-            { label: language === 'zh' ? '文档' : 'Documentation', href: 'https://docs.tai.lat' },
+            { label: language === 'zh' ? '白皮书' : 'Whitepaper', href: '/whitepaper', internal: true },
             { label: language === 'zh' ? '合约地址' : 'Contract_Addr', href: 'https://tonviewer.com/EQDrjcL2uTkVEj2tmH9wbf83ZrO5wFbgIOApyIVr223RcgpL' },
         ],
         ecosystem: [
@@ -145,8 +145,6 @@ const FooterSection = () => {
                     </span>
                     <div className="bottom-links">
                         <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">{t.footer.links.changelog}</a>
-                        <span className="separator">|</span>
-                        <a href="https://status.tai.lat" target="_blank" rel="noopener noreferrer">{t.footer.links.status}</a>
                     </div>
                     <span className="version">
                         <span className="version-dot"></span>

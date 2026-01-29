@@ -195,12 +195,10 @@ const EcosystemSection = () => {
                         {t.ecosystem.categories.governance}
                     </button>
                     <a
-                        href="https://docs.tai.lat"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="/whitepaper"
                         className="nav-item"
                     >
-                        {t.ecosystem.categories.docs} ↗
+                        {t.ecosystem.categories.docs} →
                     </a>
                 </div>
                 <div className="header-actions">
