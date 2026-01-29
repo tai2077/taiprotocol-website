@@ -53,7 +53,6 @@ const Header = () => {
     const navItems = [
         { label: t.nav.home, path: '/' },
         { label: t.nav.protocol, path: '/protocol' },
-        { label: t.nav.terminal, path: '/terminal' },
         { label: t.nav.ecosystem, path: '/ecosystem' },
         { label: t.nav.whitepaper, path: '/whitepaper' },
     ];

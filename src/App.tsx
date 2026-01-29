@@ -15,7 +15,6 @@ const INITIAL_LOADING_DELAY_MS = 2200;
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProtocolPage = lazy(() => import('./pages/ProtocolPage'));
-const TerminalPage = lazy(() => import('./pages/TerminalPage'));
 const EcosystemPage = lazy(() => import('./pages/EcosystemPage'));
 const WhitepaperPage = lazy(() => import('./pages/WhitepaperPage'));
 
@@ -54,11 +53,6 @@ const AnimatedRoutes = () => {
                     <Route path="/protocol" element={
                         <ErrorBoundary>
                             <ProtocolPage />
-                        </ErrorBoundary>
-                    } />
-                    <Route path="/terminal" element={
-                        <ErrorBoundary>
-                            <TerminalPage />
                         </ErrorBoundary>
                     } />
                     <Route path="/ecosystem" element={
