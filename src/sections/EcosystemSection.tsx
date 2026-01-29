@@ -477,7 +477,7 @@ const EcosystemSection = () => {
                             className="app-card"
                         >
                             <div className="app-logo">
-                                <img src="/faleme-logo.svg" alt="发了么" />
+                                <img src="/faleme-logo.jpg" alt="发了么" />
                             </div>
                             <div className="app-info">
                                 <h4 className="app-name">
