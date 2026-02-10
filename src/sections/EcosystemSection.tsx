@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import './EcosystemSection.css';
 
+// Standard easing curve
+const EASE_CURVE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 // Real contract data from mainnet
 const CONTRACTS = [
     {
@@ -222,13 +225,14 @@ const EcosystemSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        transition={{ ease: EASE_CURVE }}
                     >
                         <h2 className="ecosystem-title">
-                            {language === 'zh' ? 'TAI 生态系统' : 'TAI ECOSYSTEM'}<br />
-                            <span className="title-accent">{language === 'zh' ? '合约架构' : 'CONTRACT ARCHITECTURE'}</span>
+                            {t.ecosystemPage.title}<br />
+                            <span className="title-accent">{t.ecosystemPage.titleAccent}</span>
                         </h2>
                         <p className="ecosystem-subtitle">
-                            {language === 'zh' ? '10个智能合约 · TON主网部署 · 完全去中心化' : '10 Smart Contracts · TON Mainnet · Fully Decentralized'}
+                            {t.ecosystemPage.subtitle}
                         </p>
                     </motion.div>
 
@@ -294,36 +298,46 @@ const EcosystemSection = () => {
 
                     {/* Filters */}
                     <div className="ecosystem-filters">
-                        <button
+                        <motion.button
                             className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
                             onClick={() => setActiveFilter('all')}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {language === 'zh' ? '全部' : 'ALL'}
-                        </button>
-                        <button
+                            {t.ecosystemPage.filters.all}
+                        </motion.button>
+                        <motion.button
                             className={`filter-btn ${activeFilter === 'infrastructure' ? 'active' : ''}`}
                             onClick={() => setActiveFilter('infrastructure')}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {language === 'zh' ? '基础设施' : 'INFRA'}
-                        </button>
-                        <button
+                            {t.ecosystemPage.filters.infra}
+                        </motion.button>
+                        <motion.button
                             className={`filter-btn ${activeFilter === 'staking' ? 'active' : ''}`}
                             onClick={() => setActiveFilter('staking')}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {language === 'zh' ? '质押' : 'STAKING'}
-                        </button>
-                        <button
+                            {t.ecosystemPage.filters.staking}
+                        </motion.button>
+                        <motion.button
                             className={`filter-btn ${activeFilter === 'governance' ? 'active' : ''}`}
                             onClick={() => setActiveFilter('governance')}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {language === 'zh' ? '治理' : 'GOVERNANCE'}
-                        </button>
-                        <button
+                            {t.ecosystemPage.filters.governance}
+                        </motion.button>
+                        <motion.button
                             className={`filter-btn ${activeFilter === 'dapps' ? 'active' : ''}`}
                             onClick={() => setActiveFilter('dapps')}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {language === 'zh' ? '应用' : 'DAPPS'}
-                        </button>
+                            {t.ecosystemPage.filters.dapps}
+                        </motion.button>
                     </div>
                 </div>
 
@@ -333,17 +347,18 @@ const EcosystemSection = () => {
                     initial={{ opacity: 0, x: 30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
+                    transition={{ ease: EASE_CURVE }}
                     key={activeNode}
                 >
                     <div className="panel-header">
-                        <span className="panel-badge">{language === 'zh' ? '合约详情' : 'CONTRACT DETAILS'}</span>
+                        <span className="panel-badge">{t.ecosystemPage.contractDetails}</span>
                     </div>
 
                     <h3 className="panel-title">{activeNodeData?.name || 'TaiToken'}</h3>
                     <p className="panel-description">{activeDescription}</p>
 
                     <div className="panel-address">
-                        <span className="address-label">{language === 'zh' ? '合约地址' : 'Address'}:</span>
+                        <span className="address-label">{t.ecosystemPage.address}:</span>
                         <a
                             href={`https://tonviewer.com/${activeNodeData?.address}`}
                             target="_blank"
@@ -356,11 +371,11 @@ const EcosystemSection = () => {
 
                     <div className="panel-stats">
                         <div className="panel-stat">
-                            <span className="stat-label">{language === 'zh' ? '类型' : 'Type'}</span>
+                            <span className="stat-label">{t.ecosystemPage.type}</span>
                             <span className="stat-value">{activeNodeData?.type.toUpperCase()}</span>
                         </div>
                         <div className="panel-stat">
-                            <span className="stat-label">{language === 'zh' ? '连接数' : 'Connections'}</span>
+                            <span className="stat-label">{t.ecosystemPage.connections}</span>
                             <span className="stat-value">{activeNodeData?.connections.length || 0}</span>
                         </div>
                     </div>
@@ -378,34 +393,35 @@ const EcosystemSection = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ ease: EASE_CURVE }}
                 >
                     <h3 className="feature-title">
                         <span className="feature-icon">◆</span>
-                        {language === 'zh' ? '质押机制' : 'STAKING MECHANISM'}
+                        {t.ecosystemPage.staking.title}
                     </h3>
                     <div className="staking-cards">
                         <div className="staking-card">
                             <div className="card-header">
-                                <span className="card-badge">{language === 'zh' ? '灵活质押' : 'FLEXIBLE'}</span>
+                                <span className="card-badge">{t.ecosystemPage.staking.flexible}</span>
                             </div>
                             <div className="card-value">6%</div>
-                            <div className="card-label">{language === 'zh' ? '每轮收益' : 'Per Round'}</div>
+                            <div className="card-label">{t.ecosystemPage.staking.perRound}</div>
                             <ul className="card-features">
-                                <li>{language === 'zh' ? '无锁定期' : 'No lock-up period'}</li>
-                                <li>{language === 'zh' ? '随时提取' : 'Withdraw anytime'}</li>
-                                <li>{language === 'zh' ? '每轮限额 1000亿 TAI' : '100B TAI limit per round'}</li>
+                                <li>{t.ecosystemPage.staking.noLockup}</li>
+                                <li>{t.ecosystemPage.staking.withdrawAnytime}</li>
+                                <li>{t.ecosystemPage.staking.flexibleLimit}</li>
                             </ul>
                         </div>
                         <div className="staking-card featured">
                             <div className="card-header">
-                                <span className="card-badge">{language === 'zh' ? '固定质押' : 'FIXED'}</span>
+                                <span className="card-badge">{t.ecosystemPage.staking.fixed}</span>
                             </div>
                             <div className="card-value">200%</div>
-                            <div className="card-label">{language === 'zh' ? '总收益' : 'Total Yield'}</div>
+                            <div className="card-label">{t.ecosystemPage.staking.totalYield}</div>
                             <ul className="card-features">
-                                <li>{language === 'zh' ? '本金第12轮解锁' : 'Principal unlocks at Round 12'}</li>
-                                <li>{language === 'zh' ? '收益第18轮解锁' : 'Rewards unlock at Round 18'}</li>
-                                <li>{language === 'zh' ? '总限额 900亿 TAI' : '90B TAI total limit'}</li>
+                                <li>{t.ecosystemPage.staking.principalUnlock}</li>
+                                <li>{t.ecosystemPage.staking.rewardsUnlock}</li>
+                                <li>{t.ecosystemPage.staking.fixedLimit}</li>
                             </ul>
                         </div>
                     </div>
@@ -419,37 +435,28 @@ const EcosystemSection = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ ease: EASE_CURVE }}
                 >
                     <h3 className="feature-title">
                         <span className="feature-icon">◆</span>
-                        {language === 'zh' ? '治理机制' : 'GOVERNANCE'}
+                        {t.ecosystemPage.governance.title}
                     </h3>
                     <div className="governance-info">
                         <div className="governance-card">
-                            <h4>{language === 'zh' ? '市场证明 (PoM)' : 'Proof of Market (PoM)'}</h4>
-                            <p>
-                                {language === 'zh'
-                                    ? 'TAI Protocol 的治理由市场价格共识驱动。代码即法律，价格是唯一的钥匙。'
-                                    : 'TAI Protocol governance is driven by market price consensus. Code is law, price is the only key.'}
-                            </p>
+                            <h4>{t.ecosystemPage.governance.pomTitle}</h4>
+                            <p>{t.ecosystemPage.governance.pomDesc}</p>
                             <div className="governance-rules">
                                 <div className="rule">
                                     <span className="rule-icon">$1.0</span>
-                                    <span className="rule-text">
-                                        {language === 'zh' ? '团队/基金池提取门槛' : 'Team/Fund withdrawal threshold'}
-                                    </span>
+                                    <span className="rule-text">{t.ecosystemPage.governance.withdrawThreshold}</span>
                                 </div>
                                 <div className="rule">
                                     <span className="rule-icon">72h</span>
-                                    <span className="rule-text">
-                                        {language === 'zh' ? '价格共识期' : 'Price consensus period'}
-                                    </span>
+                                    <span className="rule-text">{t.ecosystemPage.governance.consensusPeriod}</span>
                                 </div>
                                 <div className="rule">
                                     <span className="rule-icon">18</span>
-                                    <span className="rule-text">
-                                        {language === 'zh' ? '解锁轮次' : 'Unlock rounds'}
-                                    </span>
+                                    <span className="rule-text">{t.ecosystemPage.governance.unlockRounds}</span>
                                 </div>
                             </div>
                         </div>
@@ -464,10 +471,11 @@ const EcosystemSection = () => {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ ease: EASE_CURVE }}
                 >
                     <h3 className="feature-title">
                         <span className="feature-icon">◆</span>
-                        {language === 'zh' ? '生态应用' : 'ECOSYSTEM APPS'}
+                        {t.ecosystemPage.apps.title}
                     </h3>
                     <div className="apps-showcase">
                         <a
@@ -480,17 +488,11 @@ const EcosystemSection = () => {
                                 <img src="/faleme-logo.jpg" alt="发了么" />
                             </div>
                             <div className="app-info">
-                                <h4 className="app-name">
-                                    {language === 'zh' ? '发了么 (TAI Wealth Node)' : 'TAI Wealth Node'}
-                                </h4>
-                                <p className="app-description">
-                                    {language === 'zh'
-                                        ? '游戏化的加密货币财富管理平台。设定目标、追踪进度、赢取奖励。'
-                                        : 'Gamified crypto wealth management platform. Set goals, track progress, earn rewards.'}
-                                </p>
+                                <h4 className="app-name">{t.ecosystemPage.apps.falemeTitle}</h4>
+                                <p className="app-description">{t.ecosystemPage.apps.falemeDesc}</p>
                                 <div className="app-tags">
-                                    <span className="app-tag">{language === 'zh' ? '财富管理' : 'Wealth'}</span>
-                                    <span className="app-tag">{language === 'zh' ? '游戏化' : 'Gamified'}</span>
+                                    <span className="app-tag">{t.ecosystemPage.apps.tagWealth}</span>
+                                    <span className="app-tag">{t.ecosystemPage.apps.tagGamified}</span>
                                     <span className="app-tag">DeFi</span>
                                 </div>
                             </div>
@@ -502,7 +504,7 @@ const EcosystemSection = () => {
 
             {/* Footer */}
             <div className="ecosystem-footer">
-                <span>{language === 'zh' ? 'TON 主网' : 'TON MAINNET'}</span>
+                <span>{t.ecosystemPage.footer.mainnet}</span>
                 <span>V 1.0_STABLE</span>
             </div>
         </section>

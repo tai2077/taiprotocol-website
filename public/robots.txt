@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://taiprotocol.com/sitemap.xml
+Sitemap: https://tai.lat/sitemap.xml

@@ -10,7 +10,7 @@ const SOCIAL_LINKS = {
     twitter: 'https://x.com/TAIProtocol',
     telegram: 'https://t.me/taitoken',
     medium: 'https://medium.com/@taiprotocol',
-    github: 'https://github.com/taiprotocol',
+    github: 'https://github.com/tai2077',
 } as const;
 
 const FooterSection = () => {

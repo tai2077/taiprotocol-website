@@ -58,11 +58,11 @@ This site is deployed on Cloudflare Pages.
 
 ## Links
 
-- Website: [taiprotocol.com](https://taiprotocol.com)
-- App: [app.taiprotocol.com](https://app.taiprotocol.com)
-- Twitter: [@taiprotocol](https://twitter.com/taiprotocol)
-- Telegram: [t.me/taiprotocol](https://t.me/taiprotocol)
-- GitHub: [github.com/taiprotocol](https://github.com/taiprotocol)
+- Website: [tai.lat](https://tai.lat)
+- App: [app.tai.lat](https://app.tai.lat)
+- Twitter: [@TAIProtocol](https://x.com/TAIProtocol)
+- Telegram: [t.me/taitoken](https://t.me/taitoken)
+- GitHub: [github.com/tai2077](https://github.com/tai2077)
 
 ## License
 

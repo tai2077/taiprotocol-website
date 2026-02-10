@@ -1,7 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useTranslation } from '../i18n';
 import './ProtocolSection.css';
+
+// Standard easing curve
+const EASE_CURVE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 // 18-round unlock data
 const unlockRounds = [
@@ -29,27 +32,22 @@ const unlockRounds = [
 const ProtocolSection = () => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-    const { language } = useTranslation();
+    const { t } = useTranslation();
     const [selectedRound, setSelectedRound] = useState(0);
     const [hoveredRound, setHoveredRound] = useState<number | null>(null);
 
-    const formatPrice = (price: number) => {
+    const formatPrice = useCallback((price: number) => {
         if (price < 0.01) return `$${price.toFixed(5)}`;
         if (price < 1) return `$${price.toFixed(4)}`;
         return `$${price.toFixed(2)}`;
-    };
+    }, []);
 
-    const getPhaseLabel = (phase: string) => {
-        const labels: Record<string, { zh: string; en: string }> = {
-            genesis: { zh: '创世', en: 'Genesis' },
-            growth: { zh: '增长期', en: 'Growth' },
-            expansion: { zh: '扩张期', en: 'Expansion' },
-            maturity: { zh: '成熟期', en: 'Maturity' },
-        };
-        return labels[phase]?.[language] || phase;
-    };
+    const getPhaseLabel = useCallback((phase: string) => {
+        const phaseKey = phase as keyof typeof t.unlockRounds.phases;
+        return t.unlockRounds.phases[phaseKey] || phase;
+    }, [t.unlockRounds.phases]);
 
-    const getPhaseColor = (phase: string) => {
+    const getPhaseColor = useCallback((phase: string) => {
         const colors: Record<string, string> = {
             genesis: '#adff2f',
             growth: '#00ff88',
@@ -57,7 +55,7 @@ const ProtocolSection = () => {
             maturity: '#ff6b6b',
         };
         return colors[phase] || '#adff2f';
-    };
+    }, []);
 
     // Calculate total growth
     const totalGrowth = (unlockRounds[18].price / unlockRounds[0].price).toFixed(0);
@@ -70,25 +68,23 @@ const ProtocolSection = () => {
                     className="hero-content"
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.8, ease: EASE_CURVE }}
                 >
                     <div className="hero-badge">
                         <span className="badge-dot"></span>
-                        <span>{language === 'zh' ? '革命性代币标准' : 'REVOLUTIONARY TOKEN STANDARD'}</span>
+                        <span>{t.protocol.badge}</span>
                     </div>
                     <h1 className="hero-title">
-                        <span className="title-line">{language === 'zh' ? '市场' : 'PROOF'}</span>
-                        <span className="title-line gradient">{language === 'zh' ? '证明' : 'OF MARKET'}</span>
+                        <span className="title-line">{t.protocol.heroTitle}</span>
+                        <span className="title-line gradient">{t.protocol.heroTitleGradient}</span>
                     </h1>
                     <p className="hero-subtitle">
-                        {language === 'zh'
-                            ? '价格是唯一的解锁钥匙。不是时间，不是 VC 投票，而是市场参与者用真金白银投票形成的价格共识。'
-                            : 'Price is the only key to unlock. Not time, not VC votes, but price consensus formed by market participants voting with real money.'}
+                        {t.protocol.heroSubtitle}
                     </p>
                     <div className="hero-quote">
                         <span className="quote-mark">"</span>
                         <span className="quote-text">
-                            {language === 'zh' ? '代码比人性更安全' : 'Code is safer than human nature'}
+                            {t.protocol.heroQuote}
                         </span>
                         <span className="quote-mark">"</span>
                     </div>
@@ -99,26 +95,26 @@ const ProtocolSection = () => {
                     className="hero-stats"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.3, ease: EASE_CURVE }}
                 >
                     <div className="stat-item">
                         <span className="stat-value">100B</span>
-                        <span className="stat-label">{language === 'zh' ? '总供应量' : 'Total Supply'}</span>
+                        <span className="stat-label">{t.protocol.stats.totalSupply}</span>
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat-item">
                         <span className="stat-value">18</span>
-                        <span className="stat-label">{language === 'zh' ? '解锁轮次' : 'Unlock Rounds'}</span>
+                        <span className="stat-label">{t.protocol.stats.unlockRounds}</span>
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat-item">
                         <span className="stat-value">72h</span>
-                        <span className="stat-label">{language === 'zh' ? '共识期' : 'Consensus Period'}</span>
+                        <span className="stat-label">{t.protocol.stats.consensusPeriod}</span>
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat-item">
                         <span className="stat-value">{totalGrowth}×</span>
-                        <span className="stat-label">{language === 'zh' ? '总增长' : 'Total Growth'}</span>
+                        <span className="stat-label">{t.protocol.stats.totalGrowth}</span>
                     </div>
                 </motion.div>
             </div>
@@ -129,11 +125,11 @@ const ProtocolSection = () => {
                     className="section-header"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: EASE_CURVE }}
                 >
                     <h2 className="section-title">
                         <span className="title-icon">◆</span>
-                        {language === 'zh' ? 'PoM 机制流程' : 'PoM MECHANISM FLOW'}
+                        {t.protocol.mechanism.title}
                     </h2>
                 </motion.div>
 
@@ -141,7 +137,7 @@ const ProtocolSection = () => {
                     className="mechanism-flow"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.5 }}
+                    transition={{ duration: 0.6, delay: 0.5, ease: EASE_CURVE }}
                 >
                     <div className="flow-step">
                         <div className="step-number">01</div>
@@ -151,8 +147,8 @@ const ProtocolSection = () => {
                                 <path d="M17 7h4v4" />
                             </svg>
                         </div>
-                        <h3>{language === 'zh' ? '价格达标' : 'Price Target'}</h3>
-                        <p>{language === 'zh' ? '市场价格达到当前轮次目标' : 'Market price reaches current round target'}</p>
+                        <h3>{t.protocol.mechanism.step1Title}</h3>
+                        <p>{t.protocol.mechanism.step1Desc}</p>
                     </div>
                     <div className="flow-arrow">→</div>
                     <div className="flow-step">
@@ -163,8 +159,8 @@ const ProtocolSection = () => {
                                 <path d="M12 6v6l4 2" />
                             </svg>
                         </div>
-                        <h3>{language === 'zh' ? '72小时共识' : '72h Consensus'}</h3>
-                        <p>{language === 'zh' ? '价格必须维持在目标之上' : 'Price must stay above target'}</p>
+                        <h3>{t.protocol.mechanism.step2Title}</h3>
+                        <p>{t.protocol.mechanism.step2Desc}</p>
                     </div>
                     <div className="flow-arrow">→</div>
                     <div className="flow-step highlight">
@@ -175,8 +171,8 @@ const ProtocolSection = () => {
                                 <path d="M7 11V7a5 5 0 0110 0v4" />
                             </svg>
                         </div>
-                        <h3>{language === 'zh' ? '自动解锁' : 'Auto Unlock'}</h3>
-                        <p>{language === 'zh' ? '合约自动分发 50亿 TAI' : 'Contract auto-distributes 5B TAI'}</p>
+                        <h3>{t.protocol.mechanism.step3Title}</h3>
+                        <p>{t.protocol.mechanism.step3Desc}</p>
                     </div>
                     <div className="flow-reset">
                         <div className="reset-icon">
@@ -185,8 +181,8 @@ const ProtocolSection = () => {
                             </svg>
                         </div>
                         <div className="reset-text">
-                            <strong>{language === 'zh' ? '熔断机制' : 'Circuit Breaker'}</strong>
-                            <span>{language === 'zh' ? '价格跌破目标，计时器归零' : 'Price drops below target, timer resets'}</span>
+                            <strong>{t.protocol.mechanism.circuitBreaker}</strong>
+                            <span>{t.protocol.mechanism.circuitBreakerDesc}</span>
                         </div>
                     </div>
                 </motion.div>
@@ -198,16 +194,14 @@ const ProtocolSection = () => {
                     className="section-header"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.6 }}
+                    transition={{ duration: 0.6, delay: 0.6, ease: EASE_CURVE }}
                 >
                     <h2 className="section-title">
                         <span className="title-icon">◆</span>
-                        {language === 'zh' ? '18轮价格里程碑' : '18-ROUND PRICE MILESTONES'}
+                        {t.protocol.rounds.title}
                     </h2>
                     <p className="section-subtitle">
-                        {language === 'zh'
-                            ? `从 $0.00008 到 $1.98 — ${totalGrowth}倍增长`
-                            : `From $0.00008 to $1.98 — ${totalGrowth}× growth`}
+                        {t.protocol.rounds.subtitle.replace('{growth}', totalGrowth)}
                     </p>
                 </motion.div>
 
@@ -216,7 +210,7 @@ const ProtocolSection = () => {
                     className="rounds-timeline"
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.8, delay: 0.7 }}
+                    transition={{ duration: 0.8, delay: 0.7, ease: EASE_CURVE }}
                 >
                     <div className="timeline-track">
                         {unlockRounds.map((round, index) => (
@@ -238,19 +232,19 @@ const ProtocolSection = () => {
                     <div className="phase-legend">
                         <div className="legend-item">
                             <span className="legend-dot genesis"></span>
-                            <span>{language === 'zh' ? '创世' : 'Genesis'}</span>
+                            <span>{t.unlockRounds.phases.genesis}</span>
                         </div>
                         <div className="legend-item">
                             <span className="legend-dot growth"></span>
-                            <span>{language === 'zh' ? '增长期 (×2.0)' : 'Growth (×2.0)'}</span>
+                            <span>{t.unlockRounds.phases.growth} (×2.0)</span>
                         </div>
                         <div className="legend-item">
                             <span className="legend-dot expansion"></span>
-                            <span>{language === 'zh' ? '扩张期 (×1.8)' : 'Expansion (×1.8)'}</span>
+                            <span>{t.unlockRounds.phases.expansion} (×1.8)</span>
                         </div>
                         <div className="legend-item">
                             <span className="legend-dot maturity"></span>
-                            <span>{language === 'zh' ? '成熟期 (×1.5)' : 'Maturity (×1.5)'}</span>
+                            <span>{t.unlockRounds.phases.maturity} (×1.5)</span>
                         </div>
                     </div>
                 </motion.div>
@@ -260,12 +254,12 @@ const ProtocolSection = () => {
                     className="round-detail"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.8 }}
+                    transition={{ duration: 0.6, delay: 0.8, ease: EASE_CURVE }}
                 >
                     <div className="detail-card">
                         <div className="detail-header">
                             <span className="detail-round">
-                                {language === 'zh' ? '轮次' : 'ROUND'} {unlockRounds[selectedRound].round}
+                                {t.protocol.rounds.roundLabel} {unlockRounds[selectedRound].round}
                             </span>
                             <span
                                 className="detail-phase"
@@ -279,36 +273,36 @@ const ProtocolSection = () => {
                         </div>
                         <div className="detail-meta">
                             <div className="meta-item">
-                                <span className="meta-label">{language === 'zh' ? '增长倍数' : 'Multiplier'}</span>
+                                <span className="meta-label">{t.protocol.rounds.multiplier}</span>
                                 <span className="meta-value">{unlockRounds[selectedRound].multiplier}</span>
                             </div>
                             <div className="meta-item">
-                                <span className="meta-label">{language === 'zh' ? '解锁量' : 'Unlock Amount'}</span>
+                                <span className="meta-label">{t.protocol.rounds.unlockAmount}</span>
                                 <span className="meta-value">5B TAI</span>
                             </div>
                             <div className="meta-item">
-                                <span className="meta-label">{language === 'zh' ? '共识期' : 'Consensus'}</span>
+                                <span className="meta-label">{t.protocol.rounds.consensus}</span>
                                 <span className="meta-value">72h</span>
                             </div>
                         </div>
                         {selectedRound > 0 && (
                             <div className="detail-distribution">
-                                <span className="dist-title">{language === 'zh' ? '分配明细' : 'Distribution'}</span>
+                                <span className="dist-title">{t.protocol.rounds.distribution}</span>
                                 <div className="dist-items">
                                     <div className="dist-item">
-                                        <span className="dist-label">{language === 'zh' ? '社区' : 'Community'}</span>
+                                        <span className="dist-label">{t.protocol.rounds.community}</span>
                                         <span className="dist-value">1.4B</span>
                                     </div>
                                     <div className="dist-item">
-                                        <span className="dist-label">{language === 'zh' ? '团队' : 'Team'}</span>
+                                        <span className="dist-label">{t.protocol.rounds.team}</span>
                                         <span className="dist-value">2.0B</span>
                                     </div>
                                     <div className="dist-item">
-                                        <span className="dist-label">{language === 'zh' ? '固定质押' : 'Fixed Staking'}</span>
+                                        <span className="dist-label">{t.protocol.rounds.fixedStaking}</span>
                                         <span className="dist-value">1.0B</span>
                                     </div>
                                     <div className="dist-item">
-                                        <span className="dist-label">{language === 'zh' ? '质押奖励' : 'Staking Rewards'}</span>
+                                        <span className="dist-label">{t.protocol.rounds.stakingRewards}</span>
                                         <span className="dist-value">0.6B</span>
                                     </div>
                                 </div>
@@ -324,11 +318,11 @@ const ProtocolSection = () => {
                     className="section-header"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.9 }}
+                    transition={{ duration: 0.6, delay: 0.9, ease: EASE_CURVE }}
                 >
                     <h2 className="section-title">
                         <span className="title-icon">◆</span>
-                        {language === 'zh' ? '传统模式 vs TAI PoM' : 'TRADITIONAL vs TAI PoM'}
+                        {t.protocol.comparison.title}
                     </h2>
                 </motion.div>
 
@@ -336,38 +330,38 @@ const ProtocolSection = () => {
                     className="comparison-grid"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 1.0 }}
+                    transition={{ duration: 0.6, delay: 1.0, ease: EASE_CURVE }}
                 >
                     {/* Traditional */}
                     <div className="comparison-card traditional">
                         <div className="card-header">
                             <span className="card-icon">✗</span>
-                            <h3>{language === 'zh' ? '传统时间解锁' : 'Traditional Time-Lock'}</h3>
+                            <h3>{t.protocol.comparison.traditional}</h3>
                         </div>
                         <div className="card-body">
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '解锁条件' : 'Unlock Condition'}</span>
-                                <span className="row-value bad">{language === 'zh' ? '时间流逝' : 'Time passes'}</span>
+                                <span className="row-label">{t.protocol.comparison.unlockCondition}</span>
+                                <span className="row-value bad">{t.protocol.comparison.timePasses}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '解锁轮次' : 'Unlock Rounds'}</span>
+                                <span className="row-label">{t.protocol.stats.unlockRounds}</span>
                                 <span className="row-value bad">1-4</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '熔断机制' : 'Circuit Breaker'}</span>
-                                <span className="row-value bad">{language === 'zh' ? '无' : 'None'}</span>
+                                <span className="row-label">{t.protocol.comparison.circuitBreaker}</span>
+                                <span className="row-value bad">{t.protocol.comparison.none}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '团队约束' : 'Team Constraint'}</span>
-                                <span className="row-value bad">{language === 'zh' ? '弱' : 'Weak'}</span>
+                                <span className="row-label">{t.protocol.comparison.teamConstraint}</span>
+                                <span className="row-value bad">{t.protocol.comparison.weak}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '利益一致性' : 'Alignment'}</span>
-                                <span className="row-value bad">{language === 'zh' ? '低' : 'Low'}</span>
+                                <span className="row-label">{t.protocol.comparison.alignment}</span>
+                                <span className="row-value bad">{t.protocol.comparison.low}</span>
                             </div>
                         </div>
                         <div className="card-footer bad">
-                            {language === 'zh' ? '92% 项目使用此模式' : '92% projects use this model'}
+                            {t.protocol.comparison.traditionalFooter}
                         </div>
                     </div>
 
@@ -382,28 +376,28 @@ const ProtocolSection = () => {
                         </div>
                         <div className="card-body">
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '解锁条件' : 'Unlock Condition'}</span>
-                                <span className="row-value good">{language === 'zh' ? '价格目标 + 72h' : 'Price + 72h'}</span>
+                                <span className="row-label">{t.protocol.comparison.unlockCondition}</span>
+                                <span className="row-value good">{t.protocol.comparison.priceTarget}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '解锁轮次' : 'Unlock Rounds'}</span>
+                                <span className="row-label">{t.protocol.stats.unlockRounds}</span>
                                 <span className="row-value good">18</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '熔断机制' : 'Circuit Breaker'}</span>
-                                <span className="row-value good">{language === 'zh' ? '自动重置' : 'Auto Reset'}</span>
+                                <span className="row-label">{t.protocol.comparison.circuitBreaker}</span>
+                                <span className="row-value good">{t.protocol.comparison.autoReset}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '团队约束' : 'Team Constraint'}</span>
-                                <span className="row-value good">{language === 'zh' ? '强' : 'Strong'}</span>
+                                <span className="row-label">{t.protocol.comparison.teamConstraint}</span>
+                                <span className="row-value good">{t.protocol.comparison.strong}</span>
                             </div>
                             <div className="compare-row">
-                                <span className="row-label">{language === 'zh' ? '利益一致性' : 'Alignment'}</span>
-                                <span className="row-value good">{language === 'zh' ? '极高' : 'Very High'}</span>
+                                <span className="row-label">{t.protocol.comparison.alignment}</span>
+                                <span className="row-value good">{t.protocol.comparison.veryHigh}</span>
                             </div>
                         </div>
                         <div className="card-footer good">
-                            {language === 'zh' ? '无业绩，无流动性' : 'No performance, no liquidity'}
+                            {t.protocol.comparison.taiFooter}
                         </div>
                     </div>
                 </motion.div>
@@ -415,10 +409,10 @@ const ProtocolSection = () => {
                     className="rules-container"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 1.1 }}
+                    transition={{ duration: 0.6, delay: 1.1, ease: EASE_CURVE }}
                 >
                     <h2 className="rules-title">
-                        {language === 'zh' ? '铁律' : 'IRON RULES'}
+                        {t.protocol.rules.title}
                     </h2>
                     <div className="rules-grid">
                         <div className="rule-card">
@@ -427,8 +421,8 @@ const ProtocolSection = () => {
                                     <path d="M12 3v18M3 12h18M5.5 5.5l13 13M18.5 5.5l-13 13" />
                                 </svg>
                             </div>
-                            <h3>{language === 'zh' ? '代码即法律' : 'Code is Law'}</h3>
-                            <p>{language === 'zh' ? '智能合约是唯一的裁判，没有后门，没有例外' : 'Smart contract is the only judge, no backdoors, no exceptions'}</p>
+                            <h3>{t.protocol.rules.codeIsLaw}</h3>
+                            <p>{t.protocol.rules.codeIsLawDesc}</p>
                         </div>
                         <div className="rule-card">
                             <div className="rule-icon">
@@ -437,8 +431,8 @@ const ProtocolSection = () => {
                                     <path d="M7 11V7a5 5 0 0110 0v4" />
                                 </svg>
                             </div>
-                            <h3>{language === 'zh' ? '无业绩无流动性' : 'No Performance, No Liquidity'}</h3>
-                            <p>{language === 'zh' ? '价格不达标，一枚代币都流不出' : 'Price not met, not a single token flows out'}</p>
+                            <h3>{t.protocol.rules.noPerformance}</h3>
+                            <p>{t.protocol.rules.noPerformanceDesc}</p>
                         </div>
                         <div className="rule-card">
                             <div className="rule-icon">
@@ -447,8 +441,8 @@ const ProtocolSection = () => {
                                     <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
                                 </svg>
                             </div>
-                            <h3>{language === 'zh' ? '链上透明' : 'On-chain Transparency'}</h3>
-                            <p>{language === 'zh' ? '所有规则写在合约里，任何人可验证' : 'All rules in contract, verifiable by anyone'}</p>
+                            <h3>{t.protocol.rules.onChain}</h3>
+                            <p>{t.protocol.rules.onChainDesc}</p>
                         </div>
                         <div className="rule-card">
                             <div className="rule-icon">
@@ -458,8 +452,8 @@ const ProtocolSection = () => {
                                     <path d="M16 8l2-2M8 8L6 6M16 16l2 2M8 16l-2 2" />
                                 </svg>
                             </div>
-                            <h3>{language === 'zh' ? '市场证明' : 'Market Proof'}</h3>
-                            <p>{language === 'zh' ? '真金白银的价格共识，不是 VC 投票' : 'Real money price consensus, not VC votes'}</p>
+                            <h3>{t.protocol.rules.marketProof}</h3>
+                            <p>{t.protocol.rules.marketProofDesc}</p>
                         </div>
                     </div>
                 </motion.div>
@@ -470,13 +464,13 @@ const ProtocolSection = () => {
                 className="protocol-cta"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 1.2 }}
+                transition={{ duration: 0.6, delay: 1.2, ease: EASE_CURVE }}
             >
                 <a href="/whitepaper" className="cta-button primary">
-                    {language === 'zh' ? '阅读白皮书' : 'Read Whitepaper'}
+                    {t.protocol.cta.whitepaper}
                 </a>
                 <a href="https://app.tai.lat" target="_blank" rel="noopener noreferrer" className="cta-button secondary">
-                    {language === 'zh' ? '启动应用' : 'Launch App'}
+                    {t.protocol.cta.launchApp}
                 </a>
             </motion.div>
         </section>
